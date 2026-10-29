@@ -1,0 +1,25 @@
+app:
+  student:
+    name: ${STUDENT_NAME:Zhambyl Osken Zharqynuly}
+
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://db:5432/studentdb}
+    username: ${SPRING_DATASOURCE_USERNAME:student}
+    password: ${SPRING_DATASOURCE_PASSWORD:change-me}
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      probes:
+        enabled: true

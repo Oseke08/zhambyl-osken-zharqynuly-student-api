@@ -1,0 +1,28 @@
+# Build output and Gradle caches
+build/
+.gradle/
+out/
+bin/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+.project
+.classpath
+.settings/
+
+# Secrets - never commit
+.env
+*.pem
+*.key
+*secret*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs and backups generated locally
+logs/*.log
+*.log
+backups/*.md

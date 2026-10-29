@@ -1,0 +1,8 @@
+.git
+.gitignore
+logs
+backups
+scripts
+build
+.gradle
+.env

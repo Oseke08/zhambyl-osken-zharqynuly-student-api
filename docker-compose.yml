@@ -1,0 +1,47 @@
+name: zhambyl-osken-zharqynuly-student-api
+
+services:
+  app:
+    image: zhambyl-osken-zharqynuly-student-api:v1.0-id37437
+    build:
+      context: .
+    container_name: zhambyl-osken-zharqynuly-app
+    ports:
+      - "8080:8080"
+    environment:
+      STUDENT_NAME: ${STUDENT_NAME:-Zhambyl Osken Zharqynuly}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - student-net
+    restart: unless-stopped
+
+  db:
+    image: postgres:16-alpine
+    container_name: zhambyl-osken-zharqynuly-db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - student-db-data:/var/lib/postgresql/data
+    networks:
+      - student-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    restart: unless-stopped
+
+networks:
+  student-net:
+    driver: bridge
+
+volumes:
+  student-db-data:
