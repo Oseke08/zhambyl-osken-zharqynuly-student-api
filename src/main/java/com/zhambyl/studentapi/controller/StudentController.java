@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -58,6 +59,15 @@ public class StudentController {
         s.setFullName(body.getFullName());
         s.setEmail(body.getEmail());
         s.setCourse(body.getCourse());
+        return repository.save(s);
+    }
+
+    @PatchMapping("/{id}")
+    public Student update(@PathVariable Long id, @RequestBody Student body) {
+        Student s = repository.findById(id).orElseThrow(() -> new StudentNotFoundException(id));
+        if (body.getFullName() != null) s.setFullName(body.getFullName());
+        if (body.getEmail() != null) s.setEmail(body.getEmail());
+        if (body.getCourse() != null) s.setCourse(body.getCourse());
         return repository.save(s);
     }
 
