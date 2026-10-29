@@ -5,7 +5,7 @@ Group: IT-2 2307
 ID: 37437
 
 Spring Boot CRUD API for students, backed by PostgreSQL, containerized with Docker
-Compose and built by a Jenkins pipeline. Full instructions are added in later steps.
+Compose and built by a Jenkins pipeline. Full instructions: see the Run section (documentation branch).
 
 ## Change: partial update (feature/zhambyl-osken-zharqynuly-crud)
 Author: Zhambyl Osken Zharqynuly. Added `PATCH /api/students/{id}` so that a client can update only some fields
